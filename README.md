@@ -11,7 +11,7 @@ pip install git+https://github.com/bbi-yggy/PyGithub@dev.project-support
 ```
 
 ### Set Script Parameters
-Open a text editor and set some parameters. These steps will show how a release note document can be created by this repository's project: [Example](https://github.com/JackLivio/release_note_generator/projects/1)
+Open a text editor and set some parameters. These steps will show how a release note document can be created from this repository's project: [Example](https://github.com/JackLivio/release_note_generator/projects/1)
 
 #### Github Login Info
 > username = "JackLivio"
@@ -22,7 +22,7 @@ Open a text editor and set some parameters. These steps will show how a release 
 > repository = "JackLivio/release_note_generator" 
 > project_name = "Example"
 
-The following should be the columns of the project you want to pull cards from. This is an array of strings, in case you want to pull cards from multiple columns.
+The following should be the names of columns you want to pull cards from. This is an array of strings, in case you want to pull cards from multiple columns. ie ( "Implemented Proposals" & "Bug Fixes")
 
 > completed_list_names = ["Completed Issues"]
 
