@@ -1,18 +1,19 @@
 from github import Github
 
-#Enter Github login information
-username = ""
-password = ""
+#Enter Github personal access token information
+# https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token
+# Add read permissions for token
+access_token = ""
 
 #Enter repository information
-repository = "" # Example "smartdevicelink/sdl_core"
-project_name="" # Example "5.0.0"
+repository = "smartdevicelink/rpc_spec" # Example "smartdevicelink/sdl_core"
+project_name="7.0.0" # Example "5.0.0"
 
-completed_list_names = ["Completed Features", "Completed Bug Fixes"] # Project Column names that you want to include in the release notes
-markdown_titles = ["Implemented Proposals", "Bug Fixes"] # Markdown titles you want to use in place of the project column names. These correspond to the completed_list_names.
-split_by_labels = True
+completed_list_names = ["Done"] # Project Column names that you want to include in the release notes
+markdown_titles = ["Done"] # Markdown titles you want to use in place of the project column names. These correspond to the completed_list_names.
+split_by_labels = False
 
-g = Github(username, password)
+g = Github(access_token)
 repo = g.get_repo(repository)
 projects = repo.get_projects()
 
@@ -24,13 +25,18 @@ for project in projects:
 		count = 0
 		for name in completed_list_names: 
 			for column in columns:
+				print("name " + name)
+				print(column.name)
 				if column.name == name:
+					print("colum name")
 					markdown_str += "## " + markdown_titles[count] + "\n\n"
 					print(markdown_titles[count])
 					cards = column.get_cards()
 					label_dict = {"no_label": ""}
 					for card in cards: 
 						issue = card.get_content()
+						if issue == None:
+							continue
 						print(issue.title)
 						print(issue.html_url)
 						labels = issue.labels
@@ -49,4 +55,4 @@ for project in projects:
 		file_name = project_name + "_release_notes.md"
 		print("Writing notes to: " + file_name)
 		file = open(file_name, "w")
-		file.write(markdown_str.encode('ascii', 'ignore'))
+		file.write(markdown_str)
